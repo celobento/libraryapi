@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootTest
 public class AuthorRepositoryTest {
@@ -23,6 +24,12 @@ public class AuthorRepositoryTest {
         authorRepository.save(author);
 
         System.out.println("Author: " + author);
+    }
+
+    @Test
+    public void listarTest() {
+        List<Author> lista = authorRepository.findAll();
+        lista.forEach(System.out::println);
     }
 
 }

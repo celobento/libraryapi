@@ -3,6 +3,7 @@ package br.com.systemit.libraryapi.model;
 import br.com.systemit.libraryapi.constants.BookGender;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "tb_book", schema = "public")
 @Data
+@ToString(exclude = "author")
 public class Book {
 
     @Id
@@ -34,7 +36,10 @@ public class Book {
     @Column(name = "price", precision = 18, scale = 2)
     private BigDecimal price;
 
-    @ManyToOne
+    @ManyToOne(
+            //cascade = CascadeType.ALL
+            fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "id_author")
     private Author author;
 
